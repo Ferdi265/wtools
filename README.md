@@ -3,8 +3,8 @@
 This project aims to implement simple tools for window management in Xorg.
 wtools is inspired by the [wmutils](https://github.com/wmutils/core) project.
 
-This project uses Xlib (Cargo crate [x11](https://crates.io/crates/x11)) to
-communicate with Xorg, as XCB was very hard to abstract to my needs.
+This project uses my own library [wlib](https://github.com/Ferdi265/wlib) to
+communicate with Xorg.
 
 ## Building
 
