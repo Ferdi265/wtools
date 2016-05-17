@@ -95,6 +95,13 @@ Moves mouse pointer relatively, absolutely, or offset to the origin of wid.
 
 Move a window relatively or absolutely.
 
+### wmovecenter
+
+`wmovecenter [-ra -m] x y wid`
+
+Moves a window relatively or absolutely. Moves window centered in absolute mode
+and has an option to also move the mouse with it.
+
 ### wresize
 
 `wresize [-ra] x y wid`
