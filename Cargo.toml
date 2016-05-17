@@ -1,0 +1,13 @@
+[package]
+name = "wtools-simple"
+version = "0.1.0"
+authors = ["theFerdi265 <theferdi265@gmail.com>"]
+
+[dependencies.wlib]
+git = "https://github.com/Ferdi265/wlib.git"
+
+[dependencies.cli-util]
+git = "https://github.com/Ferdi265/cli-util.git"
+
+[dependencies.argparse]
+version = "0.2.1"
