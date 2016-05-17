@@ -1,4 +1,4 @@
-# wtools-simple - Coreutils for Xorg, implemented in Rust
+# wtools - Coreutils for Xorg, implemented in Rust
 
 This project aims to implement simple tools for window management in Xorg.
 wtools is inspired by the [wmutils](https://github.com/wmutils/core) project.
