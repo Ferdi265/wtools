@@ -21,7 +21,7 @@ fn main() {
             (&["-r", "--relative"], Mode::Relative, "move relatively (default)"),
             (&["-a", "--absolute"], Mode::Absolute, "move absolutely"),
         flag mouse: bool = false,
-            (&["-m", "--mouse"], Mode::Relative, "move the mouse with the window"),
+            (&["-m", "--mouse"], true, "move the mouse with the window"),
         arg x: i32,
             ("x", "x coordinate"),
         arg y: i32,
@@ -41,7 +41,7 @@ fn run(mode: Mode, mouse: bool, x: i32, y: i32, wid: window::ID) -> Result<(), &
     match mode {
         Mode::Relative => {
             if mouse {
-                disp.warp_mouse_relative(shapes::Point::new(x, y));
+                try!(disp.warp_pointer_relative(shapes::Point::new(x, y)));
             }
             try!(win.reposition_relative(x, y));
         },
@@ -49,7 +49,7 @@ fn run(mode: Mode, mouse: bool, x: i32, y: i32, wid: window::ID) -> Result<(), &
             let r = win.frame().r;
             let c = r.corner(shapes::Corner::CENTER);
             if mouse {
-                win.warp_mouse(c);
+                try!(win.warp_pointer(c));
             }
             let x = x - c.x;
             let y = y - c.y;
