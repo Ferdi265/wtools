@@ -4,6 +4,7 @@ extern crate wlib;
 
 use std::env;
 use wlib::window;
+use wlib::shapes;
 
 #[derive(Copy, Clone)]
 enum Mode {
@@ -32,15 +33,16 @@ fn main() {
 
 fn run(mode: Mode, x: i32, y: i32, wid: Option<window::ID>) -> Result<(), &'static str> {
     let disp = try!(wlib::Display::open());
+    let p = shapes::Point::new(x, y);
     match wid {
         Some(w) => {
             let win = try!(disp.window(w));
-            try!(win.warp_pointer(x, y));
+            try!(win.warp_pointer(p));
         },
         None => {
             match mode {
-                Mode::Relative => try!(disp.warp_pointer_relative(x, y)),
-                Mode::Absolute => try!(disp.warp_pointer_absolute(x, y))
+                Mode::Relative => try!(disp.warp_pointer_relative(p)),
+                Mode::Absolute => try!(disp.warp_pointer_absolute(p))
             }
         }
     }

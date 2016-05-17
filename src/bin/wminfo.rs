@@ -37,8 +37,8 @@ fn run(attrs: Vec<Attr>, wid: Option<window::ID>) -> Result<(), &'static str> {
     };
     for a in attrs {
         match a {
-            Attr::X => print!("{} ", pos.0),
-            Attr::Y => print!("{} ", pos.1),
+            Attr::X => print!("{} ", pos.x),
+            Attr::Y => print!("{} ", pos.y),
         };
     }
     println!("");

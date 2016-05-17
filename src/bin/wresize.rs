@@ -37,7 +37,7 @@ fn run(mode: Mode, x: i32, y: i32, wid: window::ID) -> Result<(), &'static str> 
     );
     match mode {
         Mode::Relative => try!(win.resize_relative(x, y)),
-        Mode::Absolute => try!(win.resize_absolute(x, y))
+        Mode::Absolute => try!(win.resize_absolute(x as u32, y as u32))
     }
     Ok(())
 }

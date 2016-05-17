@@ -12,7 +12,7 @@ fn main() {
         description: "change window border",
         opt color: wlib::Color,
             (&["-c", "--color"], "border color"),
-        opt size: i32,
+        opt size: u32,
             (&["-s", "--size"], "border size"),
         arg wid: window::ID,
             ("wid", "window id")
@@ -21,7 +21,7 @@ fn main() {
     cli_util::handle_error(&name, 1, run(color, size, wid));
 }
 
-fn run(color: Option<wlib::Color>, size: Option<i32>, wid: window::ID) -> Result<(), &'static str> {
+fn run(color: Option<wlib::Color>, size: Option<u32>, wid: window::ID) -> Result<(), &'static str> {
     let disp = try!(wlib::Display::open());
     let mut win = try!(
         disp.window(wid).map_err(|_| "window does not exist")
