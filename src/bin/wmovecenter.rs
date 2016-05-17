@@ -48,12 +48,15 @@ fn run(mode: Mode, mouse: bool, x: i32, y: i32, wid: window::ID) -> Result<(), &
         Mode::Absolute => {
             let r = win.frame().r;
             let c = r.corner(shapes::Corner::CENTER);
-            if mouse {
-                try!(win.warp_pointer(c));
-            }
             let x = x - c.x;
             let y = y - c.y;
             try!(win.reposition_absolute(x, y));
+            if mouse {
+                // window center has moved, recalculate
+                let r = win.frame().r;
+                let c = r.corner(shapes::Corner::CENTER);
+                try!(win.warp_pointer(c));
+            }
         }
     }
     Ok(())
