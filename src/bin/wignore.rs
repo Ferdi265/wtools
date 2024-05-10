@@ -21,10 +21,8 @@ fn main() {
 }
 
 fn run(mode: bool, wid: window::ID) -> Result<(), &'static str> {
-    let disp = try!(wlib::Display::open());
-    let mut win = try!(
-        disp.window(wid).map_err(|_| "window does not exist")
-    );
-    try!(win.ignore(mode));
+    let disp = wlib::Display::open()?;
+    let mut win = disp.window(wid).map_err(|_| "window does not exist")?;
+    win.ignore(mode)?;
     Ok(())
 }

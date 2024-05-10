@@ -31,13 +31,11 @@ fn main() {
 }
 
 fn run(mode: Mode, x: i32, y: i32, wid: window::ID) -> Result<(), &'static str> {
-    let disp = try!(wlib::Display::open());
-    let mut win = try!(
-        disp.window(wid).map_err(|_| "window does not exist")
-    );
+    let disp = wlib::Display::open()?;
+    let mut win = disp.window(wid).map_err(|_| "window does not exist")?;
     match mode {
-        Mode::Relative => try!(win.reposition_relative(x, y)),
-        Mode::Absolute => try!(win.reposition_absolute(x, y))
+        Mode::Relative => win.reposition_relative(x, y)?,
+        Mode::Absolute => win.reposition_absolute(x, y)?
     }
     Ok(())
 }

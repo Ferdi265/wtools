@@ -34,28 +34,26 @@ fn main() {
 }
 
 fn run(mode: Mode, mouse: bool, x: i32, y: i32, wid: window::ID) -> Result<(), &'static str> {
-    let disp = try!(wlib::Display::open());
-    let mut win = try!(
-        disp.window(wid).map_err(|_| "window does not exist")
-    );
+    let disp = wlib::Display::open()?;
+    let mut win = disp.window(wid).map_err(|_| "window does not exist")?;
     match mode {
         Mode::Relative => {
             if mouse {
-                try!(disp.warp_pointer_relative(shapes::Point::new(x, y)));
+                disp.warp_pointer_relative(shapes::Point::new(x, y))?;
             }
-            try!(win.reposition_relative(x, y));
+            win.reposition_relative(x, y)?;
         },
         Mode::Absolute => {
             let r = win.frame().r;
             let c = r.corner(shapes::Corner::CENTER);
             let x = x - c.x;
             let y = y - c.y;
-            try!(win.reposition_absolute(x, y));
+            win.reposition_absolute(x, y)?;
             if mouse {
                 // window center has moved, recalculate
                 let r = win.frame().r;
                 let c = r.corner(shapes::Corner::CENTER);
-                try!(win.warp_pointer(c));
+                win.warp_pointer(c)?;
             }
         }
     }

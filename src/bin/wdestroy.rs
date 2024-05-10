@@ -26,13 +26,11 @@ fn main() {
 }
 
 fn run(mode: Mode, wid: window::ID) -> Result<(), &'static str> {
-    let disp = try!(wlib::Display::open());
-    let mut win = try!(
-        disp.window(wid).map_err(|_| "window does not exist")
-    );
+    let disp = wlib::Display::open()?;
+    let mut win = disp.window(wid).map_err(|_| "window does not exist")?;
     match mode {
-        Mode::Destroy => try!(win.destroy()),
-        Mode::Kill => try!(win.kill())
+        Mode::Destroy => win.destroy()?,
+        Mode::Kill => win.kill()?
     }
     Ok(())
 }

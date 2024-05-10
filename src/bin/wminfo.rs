@@ -27,13 +27,13 @@ fn main() {
 }
 
 fn run(attrs: Vec<Attr>, wid: Option<window::ID>) -> Result<(), &'static str> {
-    let disp = try!(wlib::Display::open());
+    let disp = wlib::Display::open()?;
     let pos = match wid {
         Some(w) => {
-            let win = try!(disp.window(w));
-            try!(win.pointer())
+            let win = disp.window(w)?;
+            win.pointer()?
         },
-        None => try!(disp.pointer())
+        None => disp.pointer()?
     };
     for a in attrs {
         match a {

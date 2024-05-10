@@ -18,10 +18,8 @@ fn main() {
 }
 
 fn run(wid: window::ID) -> Result<(), &'static str> {
-    let disp = try!(wlib::Display::open());
-    let win = try!(
-        disp.window(wid).map_err(|_| "window does not exist")
-    );
-    try!(win.focus());
+    let disp = wlib::Display::open()?;
+    let win = disp.window(wid).map_err(|_| "window does not exist")?;
+    win.focus()?;
     Ok(())
 }

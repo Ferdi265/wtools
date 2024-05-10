@@ -24,16 +24,16 @@ fn main() {
 }
 
 fn run(mode: Mode) -> Result<(), &'static str> {
-    let disp = try!(wlib::Display::open());
+    let disp = wlib::Display::open()?;
     let win = match mode {
         Mode::Root => {
-            let scrn = try!(disp.screen());
-            try!(scrn.root())
+            let scrn = disp.screen()?;
+            scrn.root()?
         },
         Mode::Focus => {
             let r = disp.focus()
                 .and_then(|wo| wo.ok_or("no window focused"));
-            try!(r)
+            r?
         }
     };
     println!("{}", win.id());

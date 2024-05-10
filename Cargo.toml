@@ -2,6 +2,7 @@
 name = "wtools"
 version = "0.3.0"
 authors = ["theFerdi265 <theferdi265@gmail.com>"]
+edition = "2021"
 
 [dependencies.wlib]
 git = "https://github.com/Ferdi265/wlib.git"

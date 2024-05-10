@@ -32,15 +32,15 @@ fn main() {
 }
 
 fn run(u: bool, o: bool, wid: Option<window::ID>) -> Result<(), &'static str> {
-    let disp = try!(wlib::Display::open());
+    let disp = wlib::Display::open()?;
     let win = match wid {
-        Some(w) => try!(disp.window(w)),
+        Some(w) => disp.window(w)?,
         None => {
-            let scrn = try!(disp.screen());
-            try!(scrn.root())
+            let scrn = disp.screen()?;
+            scrn.root()?
         }
     };
-    let c = try!(win.children());
+    let c = win.children()?;
     let iter = c.iter()
         .filter(|w| u || w.mapped())
         .filter(|w| o || !w.ignored());

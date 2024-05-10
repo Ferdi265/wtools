@@ -32,17 +32,17 @@ fn main() {
 }
 
 fn run(mode: Mode, x: i32, y: i32, wid: Option<window::ID>) -> Result<(), &'static str> {
-    let disp = try!(wlib::Display::open());
+    let disp = wlib::Display::open()?;
     let p = shapes::Point::new(x, y);
     match wid {
         Some(w) => {
-            let win = try!(disp.window(w));
-            try!(win.warp_pointer(p));
+            let win = disp.window(w)?;
+            win.warp_pointer(p)?;
         },
         None => {
             match mode {
-                Mode::Relative => try!(disp.warp_pointer_relative(p)),
-                Mode::Absolute => try!(disp.warp_pointer_absolute(p))
+                Mode::Relative => disp.warp_pointer_relative(p)?,
+                Mode::Absolute => disp.warp_pointer_absolute(p)?
             }
         }
     }

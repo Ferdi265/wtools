@@ -39,8 +39,8 @@ fn main() {
 }
 
 fn run(attrs: Vec<Attr>, wid: window::ID) -> Result<(), &'static str> {
-    let disp = try!(wlib::Display::open());
-    let win = try!(disp.window(wid));
+    let disp = wlib::Display::open()?;
+    let win = disp.window(wid)?;
     for a in attrs {
         match a {
             Attr::X => print!("{} ", win.x()),

@@ -22,10 +22,8 @@ fn main() {
 }
 
 fn run(color: Option<wlib::Color>, size: Option<u32>, wid: window::ID) -> Result<(), &'static str> {
-    let disp = try!(wlib::Display::open());
-    let mut win = try!(
-        disp.window(wid).map_err(|_| "window does not exist")
-    );
+    let disp = wlib::Display::open()?;
+    let mut win = disp.window(wid).map_err(|_| "window does not exist")?;
     let mut c = window::Changes::new();
     if let Some(color) = color {
         c.border_color(color);
@@ -33,6 +31,6 @@ fn run(color: Option<wlib::Color>, size: Option<u32>, wid: window::ID) -> Result
     if let Some(size) = size {
         c.border_width(size);
     }
-    try!(win.change(&c));
+    win.change(&c)?;
     Ok(())
 }
