@@ -6,14 +6,16 @@ wtools is inspired by the [wmutils](https://github.com/wmutils/core) project.
 This project uses my own library [wlib](https://github.com/Ferdi265/wlib) to
 communicate with Xorg.
 
+## Maintenance Note
+
+This project is unmaintained. I built this in 2016, and didn't touch it since,
+except for making it build cleanly with a modern Rust edition in 2024.
+
 ## Building
 
 This project is inteded to be build with Cargo, the Rust package manager.
 
-This project specifically requires (as of 2016.05.08) a nightly build of rustc
-to compile, as it uses some macro code (`parse_args!` from
-[cli-util](https://github.com/Ferdi265/cli-util) inexplicably doesn't work on
-release rustc) that doesn't work with release rustc.
+This project compiles with stable Rust 1.78.0.
 
 ## Documentation
 
